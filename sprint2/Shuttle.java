@@ -3,7 +3,8 @@ package sprint2;
 public class Shuttle extends Vehicle {
 
     public Shuttle(ILocation location, ITaxiCompany company) {
-        super(location, company);
+        super(location);
+        this.setCompany(company);
     }
 
     @Override
