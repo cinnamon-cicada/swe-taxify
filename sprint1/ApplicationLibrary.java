@@ -15,7 +15,7 @@ public class ApplicationLibrary {
     private static final int MAP_HEIGHT = 10;    
 
     /**
-     * Generates a pseudo-random integer value.
+     * Generates a random integer value.
      * @return a random integer between 0 and 9766
      */
     public static int rand() {
@@ -25,7 +25,7 @@ public class ApplicationLibrary {
     }
     
     /**
-     * Generates a pseudo-random integer value bounded by a maximum.
+     * Generates a random integer value bounded by a maximum.
      * @param max the upper bound for the random number (exclusive)
      * @return a random integer between 0 and max-1
      */
@@ -36,10 +36,10 @@ public class ApplicationLibrary {
     }
     
     /**
-     * Calculates the Manhattan distance between two locations.
+     * Calculates the distance between two locations.
      * @param a the first location
      * @param b the second location
-     * @return the Manhattan distance (sum of absolute differences in coordinates)
+     * @return the distance (sum of absolute differences in coordinates)
      */
     public static int distance(ILocation a, ILocation b) {
         return Math.abs(a.getX() - b.getX()) + Math.abs(a.getY() - b.getY());

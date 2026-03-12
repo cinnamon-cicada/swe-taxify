@@ -2,7 +2,7 @@ package sprint1;
 
 /**
  * Represents a taxi service request, including user, pickup and dropoff locations, rating, and distance calculation.
- * Implements the IService interface to provide service management functionality.
+ * Implements the IService interface.
  */
 public class Service implements IService {
     /** The user associated with this service */

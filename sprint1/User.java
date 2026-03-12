@@ -4,22 +4,22 @@ import java.time.LocalDate;
 
 /**
  * Represents a user in the taxi system with personal information and service management capabilities.
- * Implements the IUser interface to provide user-related functionality.
+ * Implements the IUser interface.
  */
 public class User implements IUser {
-    /** The unique identifier of the user */
+    /** The unique identifier */
     private int id;
-    /** The first name of the user */
+    /** The first name */
     private String firstName;
-    /** The last name of the user */
+    /** The last name */
     private String lastName;
-    /** The gender of the user */
+    /** The gender */
     private char gender;
-    /** The birth date of the user */
+    /** The birth date */
     private LocalDate birthDate;
     /** The taxi company associated with this user */
     private ITaxiCompany company;
-    /** Indicates if the user is currently in service */
+    /** Indicates if the user is currently requesting a service */
     private boolean service;
     
     /**
@@ -40,7 +40,7 @@ public class User implements IUser {
     }
     
     /**
-     * Gets the unique identifier of the user.
+     * Gets the unique identifier.
      * @return the user ID as an integer
      */
     @Override
@@ -49,7 +49,7 @@ public class User implements IUser {
     }
 
     /**
-     * Gets the first name of the user.
+     * Gets the first name.
      * @return the first name as a string
      */
     @Override
@@ -58,7 +58,7 @@ public class User implements IUser {
     }
     
     /**
-     * Gets the last name of the user.
+     * Gets the last name.
      * @return the last name as a string
      */
     @Override
@@ -67,7 +67,7 @@ public class User implements IUser {
     }
     
     /**
-     * Gets the gender of the user.
+     * Gets the gender.
      * @return the gender as a character ('M' or 'F')
      */
     @Override
@@ -76,7 +76,7 @@ public class User implements IUser {
     }
 
     /**
-     * Gets the birth date of the user.
+     * Gets the birth date.
      * @return the birth date as a LocalDate
      */
     @Override
@@ -85,8 +85,8 @@ public class User implements IUser {
     }
 
     /**
-     * Checks if the user is currently in service.
-     * @return true if the user is in service, false otherwise
+     * Checks if the user is currently requesting a service.
+     * @return true if the user is requesting a service, false otherwise
      */
     @Override
     public boolean getService() {
@@ -94,7 +94,7 @@ public class User implements IUser {
     }
     
     /**
-     * Sets the service status of the user.
+     * Sets the service status.
      * @param service true to set the user in service, false otherwise
      */
     @Override
@@ -133,7 +133,7 @@ public class User implements IUser {
     }
     
     /**
-     * Returns a string representation of the user.
+     * Returns a string representation.
      * @return a string describing the user's details
      */
     @Override

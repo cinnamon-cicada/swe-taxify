@@ -1,8 +1,8 @@
 package sprint1;
 
 /**
- * Tracks and manages statistics for taxi services including service count, ratings, distance traveled, and billing.
- * This class implements the IStatistics interface and maintains cumulative data about service usage.
+ * Tracks and manages statistics for taxi services.
+ * This class implements the IStatistics interface.
  */
 public class Statistics implements IStatistics {
     /** Total number of services provided */
@@ -11,9 +11,9 @@ public class Statistics implements IStatistics {
     private int ratings;
     /** Cumulative star rating sum */
     private int stars;
-    /** Total distance traveled in service units */
+    /** Total distance traveled */
     private int distance;
-    /** Total billing amount in currency units */
+    /** Total billing amount */
     private double billing;
     
     /**
@@ -92,7 +92,7 @@ public class Statistics implements IStatistics {
     
     /**
      * Adds stars to the cumulative star total.
-     * @param stars the number of stars to add (typically 1-5)
+     * @param stars the number of stars to add
      */
     @Override
     public void updateStars(int stars) {
