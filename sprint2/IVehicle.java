@@ -80,6 +80,7 @@ public interface IVehicle extends IMovable {
      * Returns a string representation of this vehicle.
      * @return a string representation
      */
+    @Override
     public String toString();
     
 }

@@ -1,13 +1,13 @@
 package sprint2;
 
 /**
- * Represents a location in a two-dimensional coordinate system.
+ * Represents a location in 2D space.
  * Implements the ILocation interface to provide access to x and y coordinates.
  */
 public class Location implements ILocation {
-    /** The x-coordinate of this location */
+    /** The x-coordinate */
     private int x;
-    /** The y-coordinate of this location */
+    /** The y-coordinate */
     private int y;
 
     /**

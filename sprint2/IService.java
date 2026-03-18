@@ -1,7 +1,7 @@
 package sprint2;
 
 /**
- * Represents a taxi service request, including user, pickup and dropoff locations, rating, and distance calculation.
+ * Represents a taxi service, including user, pickup and dropoff locations, rating, and distance calculation.
  * Provides methods to access and modify service details.
  */
 public interface IService {

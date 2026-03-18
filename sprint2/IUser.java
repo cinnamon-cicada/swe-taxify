@@ -3,7 +3,7 @@ package sprint2;
 import java.time.LocalDate;
 
 /**
- * Interface representing a user in the taxi system.
+ * Interface representing a user.
  * Provides methods to access and modify user information, manage services, and interact with the taxi company.
  */
 public interface IUser {
