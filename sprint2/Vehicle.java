@@ -1,14 +1,6 @@
 package sprint2;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 public abstract class Vehicle implements IVehicle {
-    private static final AtomicInteger NEXT_ID = new AtomicInteger(1);
-
-    private static int getNextId() {
-        return NEXT_ID.getAndIncrement();
-    }
-
     private int id;
     private ITaxiCompany company;
     private IService service;
@@ -18,13 +10,6 @@ public abstract class Vehicle implements IVehicle {
     private IStatistics statistics;
     private IRoute route;
         
-    /**
-     * Creates a vehicle with an automatically assigned unique ID.
-     */
-    protected Vehicle(ILocation location) {
-        this(getNextId(), location);
-    }
-
     public Vehicle(int id, ILocation location) {        
         this.id = id;
         this.service = null;
