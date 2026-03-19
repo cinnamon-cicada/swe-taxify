@@ -8,8 +8,8 @@ public class Taxi extends Vehicle {
     }
 
     @Override
-    public double calculateCost() {
+    public double calculateCost() { //Taxi is 2 Euro instead of standard 1 Euro from Vehicle
         return super.calculateCost() * 2;
     }
-    
+    //Only need to implement classes that change from vehicle, thus no others needed
 }
