@@ -10,7 +10,7 @@ public abstract class Vehicle implements IVehicle {
     private IStatistics statistics;
     private IRoute route;
         
-    public Vehicle(int id, ILocation location) {        
+    public Vehicle(int id, ILocation location) {      //implementing all private membervariables   
         this.id = id;
         this.service = null;
         this.status = VehicleStatus.FREE;
@@ -21,28 +21,28 @@ public abstract class Vehicle implements IVehicle {
     }
 
     @Override
-    public int getId() {
+    public int getId() { //returns ID
         return this.id;
     }
  
     @Override
-    public ILocation getLocation() {
-        return this.location;
+    public ILocation getLocation() { //returns location
+        return this.location; 
     }
 
     @Override
-    public ILocation getDestination() {
+    public ILocation getDestination() { //returns destination
         return this.destination;
     }
     
     @Override
-    public IService getService() {
+    public IService getService() { //returns service
         return this.service;
     }
     
     @Override
-    public IStatistics getStatistics() {
-        return this.statistics;
+    public IStatistics getStatistics() { //returns statistics
+        return this.statistics; 
     }
     
     @Override
@@ -94,7 +94,7 @@ public abstract class Vehicle implements IVehicle {
 
     @Override
     public void notifyArrivalAtPickupLocation() {
-        // notify the company that the vehicle is at the pickup location and start the service
+        // notify the company that the vehicle is at the pickup location
         if(this.location.getX() == this.service.getPickupLocation().getX() && 
             this.location.getY() == this.service.getPickupLocation().getY()) {
             this.company.arrivedAtPickupLocation(this);
@@ -103,6 +103,7 @@ public abstract class Vehicle implements IVehicle {
         
     @Override
     public void notifyArrivalAtDropoffLocation() {
+        // notify the company that the vehicle is at the dropoff location
         if(this.location.getX() == this.service.getDropoffLocation().getX() && 
             this.location.getY() == this.service.getDropoffLocation().getY()) {
             this.company.arrivedAtDropoffLocation(this);
@@ -110,7 +111,7 @@ public abstract class Vehicle implements IVehicle {
      }
         
     @Override
-    public boolean isFree() {
+    public boolean isFree() {  //checking if vehicle is free or not
         if(this.status == VehicleStatus.FREE) {
             return true;
         }
@@ -152,7 +153,7 @@ public abstract class Vehicle implements IVehicle {
     }
 
     @Override
-    public double calculateCost() {
+    public double calculateCost() { //basic cost calculator that will be overriden by specific vehicles later
         return this.service.calculateDistance();
     }
 
