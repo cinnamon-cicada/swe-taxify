@@ -96,12 +96,10 @@ public class TaxiCompany implements ITaxiCompany, ISubject {
     public void arrivedAtPickupLocation(IVehicle vehicle) {
         // notify the observer a vehicle arrived at the pickup location
         IService service = vehicle.getService();
-        notifyObserver(
-            String.format("%-8s", vehicle.getClass().getSimpleName()) +
-            vehicle.getId() + " picks up user " +
-            service.getUser().getId() + " at location " +
-            service.getOrigin().toString()
-        );
+        int user = service.getUser().getId();
+        int userIndex = findUserIndex(user);
+
+        notifyObserver(String.format("%-8s",vehicle.getClass().getSimpleName()) + vehicle.getId() + " picks up user " + user);
     }
 
     @Override
@@ -138,7 +136,7 @@ public class TaxiCompany implements ITaxiCompany, ISubject {
         }
 
         // Notify
-        this.observer.updateStatus(message);
+        observer.updateObserver(message);
     }
 
     /**

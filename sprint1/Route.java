@@ -36,6 +36,12 @@ public class Route implements IRoute {
      */
     @Override
     public ILocation getNextLocation() {
+        // If the route is empty, return null
+        if (this.route.isEmpty()) {
+            return null;
+        }
+
+        // Other locations remain
         ILocation location = this.route.get(0);
         
         this.route.remove(0);
