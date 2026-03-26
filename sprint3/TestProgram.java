@@ -31,9 +31,9 @@ public class TestProgram {
             ILocation location = ApplicationLibrary.randomLocation();
             IVehicle vehicle;
             if (i < 5) {
-                vehicle = new Taxi(location, company);
+                vehicle = new Taxi(i, location, company);
             } else {
-                vehicle = new Shuttle(location, company);
+                vehicle = new Shuttle(i, location, company);
             }
             vehicles.add(vehicle);
         }

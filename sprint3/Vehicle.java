@@ -20,28 +20,48 @@ public abstract class Vehicle implements IVehicle {
         this.route = new Route(this.location, this.destination);
     }
 
+    /**
+     * Returns the vehicle's unique identifier.
+     * @return the vehicle ID
+     */
     @Override
-    public int getId() { //returns ID
+    public int getId() {
         return this.id;
     }
  
+    /**
+     * Returns the vehicle's current location.
+     * @return the current location
+     */
     @Override
-    public ILocation getLocation() { //returns location
+    public ILocation getLocation() {
         return this.location; 
     }
 
+    /**
+     * Returns the vehicle's current destination.
+     * @return the destination location
+     */
     @Override
-    public ILocation getDestination() { //returns destination
+    public ILocation getDestination() {
         return this.destination;
     }
     
+    /**
+     * Returns the service currently assigned to this vehicle.
+     * @return the current service, or null if no service is assigned
+     */
     @Override
-    public IService getService() { //returns service
+    public IService getService() {
         return this.service;
     }
     
+    /**
+     * Returns the vehicle's statistics.
+     * @return the vehicle statistics
+     */
     @Override
-    public IStatistics getStatistics() { //returns statistics
+    public IStatistics getStatistics() {
         return this.statistics; 
     }
     
@@ -110,8 +130,12 @@ public abstract class Vehicle implements IVehicle {
         }
      }
         
+    /**
+     * Checks whether the vehicle is currently free and available for service.
+     * @return true if the vehicle is free, false otherwise
+     */
     @Override
-    public boolean isFree() {  //checking if vehicle is free or not
+    public boolean isFree() {
         if(this.status == VehicleStatus.FREE) {
             return true;
         }
@@ -152,8 +176,13 @@ public abstract class Vehicle implements IVehicle {
         }
     }
 
+    /**
+     * Calculates the cost for the current service based on distance.
+     * This is a basic implementation that can be overridden by specific vehicle types.
+     * @return the calculated service cost
+     */
     @Override
-    public double calculateCost() { //basic cost calculator that will be overriden by specific vehicles later
+    public double calculateCost() {
         return this.service.calculateDistance();
     }
 

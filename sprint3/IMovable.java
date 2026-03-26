@@ -2,7 +2,9 @@ package sprint3;
 
 public interface IMovable {
 
-    /* Move the vehicle to a new location. */
+    /**
+     * Moves this vehicle to its next location according to its internal logic.
+     */
     public void move();
     
 }

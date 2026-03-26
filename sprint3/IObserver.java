@@ -1,7 +1,10 @@
 package sprint3;
 
 public interface IObserver {
-    //Outline for observer which shall be implemented by IApplicationSimulator
+    /**
+     * Called when the observed subject notifies this observer.
+     * @param message the notification message from the subject
+     */
     public void updateObserver(String message);
 
 }
