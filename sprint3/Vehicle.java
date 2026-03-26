@@ -144,33 +144,28 @@ public abstract class Vehicle implements IVehicle {
     
     @Override
     public void move() {
-        // get the next location from the driving route
+        // check if the route has locations to move to
+        if (this.route.hasLocations()) {
+            // get the next location from the driving route
+            this.location = this.route.getNextLocation();
+        }
         
-        this.location = this.route.getNextLocation();        
-        
-        // if the route has more locations the vehicle continues its route, otherwise the vehicle has arrived to a pickup or drop off location
-        
+        // if the route has no more locations, the vehicle has arrived at a destination
         if (!this.route.hasLocations()) {
             if (this.service == null) {
                 // the vehicle continues its random route
-
                 this.destination = ApplicationLibrary.randomLocation(this.location);
                 this.route = new Route(this.location, this.destination);
             }
             else {
                 // check if the vehicle has arrived to a pickup or drop off location
-
                 ILocation origin = this.service.getPickupLocation();
                 ILocation destination = this.service.getDropoffLocation();
 
                 if (this.location.getX() == origin.getX() && this.location.getY() == origin.getY()) {
-
                     notifyArrivalAtPickupLocation();
-
                 } else if (this.location.getX() == destination.getX() && this.location.getY() == destination.getY()) {
-
                     notifyArrivalAtDropoffLocation();
-
                 }        
             }
         }

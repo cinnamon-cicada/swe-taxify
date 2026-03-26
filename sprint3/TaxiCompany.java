@@ -98,8 +98,10 @@ public class TaxiCompany implements ITaxiCompany, ISubject {
         IService service = vehicle.getService();
         int user = service.getUser().getId();
         int userIndex = findUserIndex(user);
+        this.totalServices++; // Increment total services when a pickup occurs
 
         notifyObserver(String.format("%-8s",vehicle.getClass().getSimpleName()) + vehicle.getId() + " picks up user " + user);
+        vehicle.startService();
     }
 
     @Override
@@ -121,6 +123,8 @@ public class TaxiCompany implements ITaxiCompany, ISubject {
             String.format("%-8s", vehicle.getClass().getSimpleName()) +
             vehicle.getId() + " drops off user " + user
         );
+
+        vehicle.endService();
     }
 
     @Override
