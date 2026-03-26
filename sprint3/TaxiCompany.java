@@ -26,12 +26,12 @@ public class TaxiCompany implements ITaxiCompany, ISubject {
     
     @Override
     public String getName() {
-        // return name
+        return this.name;
     }
 
     @Override
     public int getTotalServices() {
-        // return total services
+        return this.totalServices;
     }
         
     @Override
@@ -81,6 +81,8 @@ public class TaxiCompany implements ITaxiCompany, ISubject {
     @Override
     public void arrivedAtPickupLocation(IVehicle vehicle) {
         // notify the observer a vehicle arrived at the pickup location
+        IService service = vehicle.getService();
+        notifyObserver(String.format("%-8s",vehicle.getClass().getSimpleName()) + vehicle.getId() + " picks up user " + service.getUser().getId() + " at location " + service.getOrigin().toString());
     }
     
     @Override
@@ -105,20 +107,36 @@ public class TaxiCompany implements ITaxiCompany, ISubject {
         
     @Override
     public void addObserver(IObserver observer) {
-        // add a observer
+        this.observer = observer;
     }
     
     @Override
     public void notifyObserver(String message) {
-        // send a message to the observer
+        // Initialize observer
+        if(this.observer == null) {
+            this.observer = observer;
+        }
+        
+        // Notify
+        this.observer.updateStatus(message);
     }
     
     private int findFreeVehicle() {
-        // returns the index of a free vehicle in this.vehicles
+        for (int i = 0; i < this.vehicles.size(); i++) {
+            if (this.vehicles.get(i).isFree()) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     private int findUserIndex(int id) {
-        // returns the index of the user id in this.users
+        for (int i = 0; i < this.users.size(); i++) {
+            if (this.users.get(i).getId() == id) {
+                return i;
+            }
+        }
+        return -1;
     }
 }
 
