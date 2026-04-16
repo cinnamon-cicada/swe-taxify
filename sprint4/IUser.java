@@ -59,7 +59,7 @@ public interface IUser {
     /**
      * Requests a service from the associated taxi company.
      */
-    public void requestService();
+    public void requestService(boolean pinkRide, String rideMode);
     
     /**
      * Rates a completed service.

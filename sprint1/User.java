@@ -1,7 +1,6 @@
 package sprint1;
 
 import java.time.LocalDate;
-import java.time.Period;
 
 /**
  * Represents a user in the taxi system with personal information and service management capabilities.
@@ -117,25 +116,7 @@ public class User implements IUser {
      */
     @Override
     public void requestService() {
-        this.company.provideService(this.id, false, "Standard");
-    }
-
-    /**
-     * Requests a service from the associated taxi company.
-     * @param pinkRide requests a ride by, and for, women
-     * @param rideMode "Silent" or "Standard" noise levels for the ride
-     */
-    @Override
-    public void requestService(boolean pinkRide, String rideMode) {
-        if (pinkRide) {
-            int age = Period.between(this.getBirthDate(), LocalDate.now()).getYears();
-
-            if (!this.getGender().equals("F") || age >= 18) {
-                throw new IllegalArgumentException("Pink ride is only available for adult female drivers.");
-            }
-        }
-
-        this.company.provideService(this.id, pinkRide, rideMode);
+        this.company.provideService(this.id);
     }
     
     /**
