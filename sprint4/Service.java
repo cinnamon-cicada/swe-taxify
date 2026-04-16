@@ -1,4 +1,6 @@
-package sprint3;
+package sprint4;
+
+import java.util.ArrayList;
 
 /**
  * Represents a taxi service request, including user, pickup and dropoff locations, rating, and distance calculation.
@@ -43,8 +45,8 @@ public class Service implements IService {
      * @return the IUsers who are included in the service
      */
     @Override
-    public IUser[] getUsers() {
-        return this.users[];
+    public ArrayList<IUser> getUsers() {
+        return this.users;
     }
     
     /**

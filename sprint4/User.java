@@ -1,6 +1,7 @@
-package sprint3;
+package sprint4;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.Random;
 
 /**
@@ -122,7 +123,7 @@ public class User implements IUser {
         if (pinkRide) {
             int age = Period.between(this.getBirthDate(), LocalDate.now()).getYears();
 
-            if (!this.getGender().equals("F") || age >= 18) {
+            if (!(this.getGender() == 'F') || age >= 18) {
                 throw new IllegalArgumentException("Pink ride is only available for adult female drivers.");
             }
         }

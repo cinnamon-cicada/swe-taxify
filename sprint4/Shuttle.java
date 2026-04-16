@@ -1,9 +1,9 @@
-package sprint3;
+package sprint4;
 
 public class Shuttle extends Vehicle {
 
-    public Shuttle(int id, ILocation location, ITaxiCompany company) {
-        super(id, location);
+    public Shuttle(int id, ILocation location, ITaxiCompany company, IDriver driver) {
+        super(id, location, driver);
         this.setCompany(company);
     }
 

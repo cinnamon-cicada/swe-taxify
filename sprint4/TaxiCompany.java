@@ -1,4 +1,4 @@
-package sprint3;
+package sprint4;
 
 import java.util.List;
 import java.util.Random;
@@ -49,18 +49,18 @@ public class TaxiCompany implements ITaxiCompany, ISubject {
     @Override
     public boolean provideService(int user, boolean pinkRide, String rideMode) {
         int userIndex = findUserIndex(user);
-        Object[] vehicleData = findFreeVehicle(pinkRide);
+        int[] vehicleData = findFreeVehicle(pinkRide);
         int vehicleIndex = vehicleData[0];
 
         // implement shared rides, with random acceptance by users
-        boolean sharedRide = vehicleData[1];
+        boolean sharedRide = vehicleData[1] == 1;
         boolean accept = false;
 
         if (sharedRide) {
             while(!accept && sharedRide) {
-                Object[] tempVehicle = findFreeVehicle(pinkRide);
+                int[] tempVehicle = findFreeVehicle(pinkRide);
                 vehicleIndex = tempVehicle[0];
-                sharedRide = tempVehicle[1];
+                sharedRide = tempVehicle[1] == 1;
                 otherUsers = this.vehicles.get(vehicleIndex).getService().getUsers();
                 accept = this.users.get(userIndex).acceptSharedRide();
 
@@ -122,13 +122,12 @@ public class TaxiCompany implements ITaxiCompany, ISubject {
     public void arrivedAtPickupLocation(IVehicle vehicle) {
         // notify the observer a vehicle arrived at the pickup location
         IService service = vehicle.getService();
-        int user = service.getUser().getId();
         this.totalServices++; // Increment total services when a pickup occurs
 
         // create string to notify observer
         String note = String.format("%-8s",vehicle.getClass().getSimpleName()) + vehicle.getId() + " picks up user(s) ";
-        for(IUser user : service.getUsers()) {
-            note += user + ", "
+        for(IUser u : service.getUsers()) {
+            note += u + ", ";
         }
 
         note = note.substring(0, note.length() - 2);
@@ -161,7 +160,7 @@ public class TaxiCompany implements ITaxiCompany, ISubject {
         note = note.substring(0, note.length() - 2);
         notifyObserver(note);
 
-        vehicle.endService(service.getUsers().size());
+        vehicle.endService(service.getUsers().length);
     }
 
     @Override
@@ -184,14 +183,14 @@ public class TaxiCompany implements ITaxiCompany, ISubject {
      * Finds the first available (free) vehicle.
      * @return index of the free vehicle, or -1 if none are available.
      */
-    private Object[] findFreeVehicle(boolean pinkRide) {
+    private int[] findFreeVehicle(boolean pinkRide) {
         for (int i = 0; i < this.vehicles.size(); i++) {
             if (this.vehicles.get(i).isFree()) {
-                if (!pinkRide || pinkRide && this.vehicles.get(i).getDriver().getGender() == "F") {
-                    return {i, false};
+                if (!pinkRide || pinkRide && this.vehicles.get(i).getDriver().getGender() == 'F') {
+                    return new int[]{i, 0};
                 }
             } else {
-                return {i, true}
+                return new int[]{i, 1};
             }
         }
     }

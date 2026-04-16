@@ -1,4 +1,4 @@
-package sprint3;
+package sprint4;
 
 import java.util.List;
 
@@ -74,12 +74,14 @@ public class ApplicationSimulator implements IApplicationSimulator, IObserver {
     /**
      * Requests a service from the taxi company for the first available user.
      * A user is considered available if they are not currently in a service.
+     * @param pinkRide if a ride is by women, for women/children
+     * @param rideMode if a ride is Silent or Standard
      */
     @Override
-    public void requestService() {
+    public void requestService(boolean pinkRide, String rideMode) {
         for (IUser user : this.users) {
             if (!user.getService()) { // user is free
-                this.company.provideService(user.getId());
+                this.company.provideService(user.getId(), pinkRide, rideMode);
                 break; // request only one service per update cycle
             }
         }

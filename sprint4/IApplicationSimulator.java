@@ -1,4 +1,4 @@
-package sprint3;
+package sprint4;
 
 public interface IApplicationSimulator {
     /**
@@ -18,8 +18,10 @@ public interface IApplicationSimulator {
     
     /**
      * Requests a service from the taxi company.
+     * @param pinkRide if a ride is by women, for women/children
+     * @param rideMode if a ride is Silent or Standard
      */
-    public void requestService();
+    public void requestService(boolean pinkRide, String rideMode);
     
     /**
      * Gets the total number of services completed.

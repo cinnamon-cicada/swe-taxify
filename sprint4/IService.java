@@ -1,4 +1,6 @@
-package sprint3;
+package sprint4;
+
+import java.util.ArrayList;
 
 /**
  * Represents a taxi service, including user, pickup and dropoff locations, rating, and distance calculation.
@@ -7,10 +9,10 @@ package sprint3;
 public interface IService {
 
     /**
-     * Gets the user associated with this service.
-     * @return the IUser who requested the service
+     * Gets the users associated with this service.
+     * @return the IUsers who requested the service
      */
-    public IUser getUser();
+    public ArrayList<IUser> getUsers();
     
     /**
      * Gets the pickup location for this service.
@@ -51,6 +53,6 @@ public interface IService {
     /**
      * Add a user to the current service.
      */
-    public void addUser();
+    public void addUser(IUser user);
     
 }

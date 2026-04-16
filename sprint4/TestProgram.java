@@ -1,4 +1,4 @@
-package sprint3;
+package sprint4;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -12,6 +12,10 @@ import java.time.LocalDate;
 
 public class TestProgram {
     public static void main(String[] args) {
+        // Declare two drivers
+        IDriver driverA = new Driver("DriverA", 'F', LocalDate.of(1990, 7, 19), 5, 4.8);
+        IDriver driverB = new Driver("DriverB", 'M', LocalDate.of(1990, 7, 19), 5, 4.8);
+
         // Declare a list of users and instantiate at least 15 users
         List<IUser> users = new ArrayList<>();
         for (int i = 1; i <= 15; i++) {
@@ -31,9 +35,9 @@ public class TestProgram {
             ILocation location = ApplicationLibrary.randomLocation();
             IVehicle vehicle;
             if (i < 5) {
-                vehicle = new Taxi(i, location, company);
+                vehicle = new Taxi(i, location, company, driverA);
             } else {
-                vehicle = new Shuttle(i, location, company);
+                vehicle = new Shuttle(i, location, company, driverB);
             }
             vehicles.add(vehicle);
         }
@@ -46,7 +50,7 @@ public class TestProgram {
         // Start simulation with at least 5 requests
         for (int i = 0; i < 5; i++) {
             int userId = ApplicationLibrary.rand(users.size());
-            users.get(userId).requestService();
+            users.get(userId).requestService(false, "Silent");
         }
 
         // Show status each iteration
@@ -65,7 +69,7 @@ public class TestProgram {
             // Randomly request a service
             if (ApplicationLibrary.rand() % 2 == 0) {
                 int userId = ApplicationLibrary.rand(users.size());
-                users.get(userId).requestService();
+                users.get(userId).requestService(false, "Silent");
             }
 
             // Update and show status

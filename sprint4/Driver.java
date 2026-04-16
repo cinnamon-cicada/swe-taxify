@@ -1,5 +1,7 @@
 package sprint4;
 
+import java.time.LocalDate;
+
 /**
  * Concrete implementation of the IDriver interface.
  * Represents a driver with profile details such as name, gender,
@@ -9,8 +11,8 @@ public class Driver implements IDriver {
 
     // driver’s profile
     private String name;
-    private String gender;
-    private String birthDate;
+    private char gender;
+    private LocalDate birthDate;
     private int yearsOfExperience;
     private double rating;
 
@@ -20,8 +22,7 @@ public class Driver implements IDriver {
      */
     public Driver() {
         this.name = "";
-        this.gender = "";
-        this.birthDate = "";
+        this.gender = 'F';
         this.yearsOfExperience = 0;
         this.rating = 0.0;
     }
@@ -36,7 +37,7 @@ public class Driver implements IDriver {
      * @param yearsOfExperience years of driving experience
      * @param rating the driver's rating
      */
-    public Driver(String name, String gender, String birthDate,
+    public Driver(String name, char gender, LocalDate birthDate,
                   int yearsOfExperience, double rating) {
         this.name = name;
         this.gender = gender;
@@ -65,7 +66,7 @@ public class Driver implements IDriver {
      * {@inheritDoc}
      */
     @Override
-    public String getGender() {
+    public char getGender() {
         return gender;
     }
 
@@ -73,7 +74,7 @@ public class Driver implements IDriver {
      * {@inheritDoc}
      */
     @Override
-    public void setGender(String gender) {
+    public void setGender(char gender) {
         this.gender = gender;
     }
 
@@ -81,7 +82,7 @@ public class Driver implements IDriver {
      * {@inheritDoc}
      */
     @Override
-    public String getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
@@ -89,7 +90,7 @@ public class Driver implements IDriver {
      * {@inheritDoc}
      */
     @Override
-    public void setBirthDate(String birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 

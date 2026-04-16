@@ -1,5 +1,7 @@
 package sprint4;
 
+import java.time.LocalDate;
+
 /**
  * Interface representing a Driver profile.
  * Provides method signatures for accessing and modifying driver attributes.
@@ -22,25 +24,25 @@ public interface IDriver {
      * Gets the driver's gender.
      * @return the gender of the driver
      */
-    String getGender();
+    char getGender();
 
     /**
      * Sets the driver's gender.
      * @param gender the gender to set
      */
-    void setGender(String gender);
+    void setGender(char gender);
 
     /**
      * Gets the driver's birth date.
      * @return the birth date of the driver
      */
-    String getBirthDate();
+    LocalDate getBirthDate();
 
     /**
      * Sets the driver's birth date.
      * @param birthDate the birth date to set
      */
-    void setBirthDate(String birthDate);
+    void setBirthDate(LocalDate birthDate);
 
     /**
      * Gets the driver's years of experience.

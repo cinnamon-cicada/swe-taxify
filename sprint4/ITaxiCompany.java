@@ -1,4 +1,4 @@
-package sprint3;
+package sprint4;
 
 /**
  * Interface representing a taxi company that manages services and provides basic operations.
@@ -21,9 +21,11 @@ public interface ITaxiCompany {
     /**
      * Attempts to provide a service to the specified user.
      * @param user the ID of the user requesting the service
+     * @param pinkRide if it's a ride offered by a woman driver to women/kids
+     * @param rideMode Silent or Standard offered
      * @return true if the service was successfully provided, false otherwise
      */
-    public boolean provideService(int user);
+    public boolean provideService(int user, boolean pinkRide, String rideMode);
 
     /**
      * Notifies the company that a vehicle has arrived at the pickup location.

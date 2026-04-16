@@ -1,4 +1,4 @@
-package sprint3;
+package sprint4;
 
 public interface IVehicle extends IMovable {
 
@@ -32,8 +32,19 @@ public interface IVehicle extends IMovable {
      */
     public IStatistics getStatistics();
 
-    public IDriver setDriver(IDriver driver);
+    /**
+     * Assigns a driver.
+     *
+     * @param driver the driver to set
+     * @return the driver that was assigned
+     */
+    public void setDriver(IDriver driver);
 
+    /**
+     * Retrieves the current driver.
+     *
+     * @return the current driver, or null if no driver is assigned
+     */
     public IDriver getDriver();
 
     /**
@@ -55,8 +66,9 @@ public interface IVehicle extends IMovable {
 
     /**
      * Ends the current service.
+     * @param riders number of riders
      */
-    public void endService();
+    public void endService(int riders);
 
     /**
      * Notifies that the vehicle has arrived at the pickup location.

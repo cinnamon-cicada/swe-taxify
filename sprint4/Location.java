@@ -1,4 +1,4 @@
-package sprint3;
+package sprint4;
 
 /**
  * Represents a location in 2D space.

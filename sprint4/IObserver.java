@@ -1,4 +1,4 @@
-package sprint3;
+package sprint4;
 
 public interface IObserver {
     /**

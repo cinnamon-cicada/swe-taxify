@@ -1,4 +1,4 @@
-package sprint3;
+package sprint4;
 
 public abstract class Vehicle implements IVehicle {
     private int id;
@@ -22,10 +22,12 @@ public abstract class Vehicle implements IVehicle {
         this.driver = driver;
     }
 
+    @Override
     public void setDriver(IDriver driver) {
         this.driver = driver;
     };
 
+    @Override
     public IDriver getDriver() {
         return this.driver;
     };
@@ -198,9 +200,30 @@ public abstract class Vehicle implements IVehicle {
 
     @Override
     public String toString() {
-        return this.id + " at " + this.location + " driving to " + this.destination +
-               ((this.status == VehicleStatus.FREE) ? " is free with path " + this.route.toString(): ((this.status == VehicleStatus.PICKUP) ?
-               " to pickup user " + this.service.getUser().getId() : " in service "));
-    }    
+        String result = this.id + " at " + this.location + " driving to " + this.destination;
+
+        if (this.status == VehicleStatus.FREE) {
+            result += " is free with path " + this.route.toString();
+
+        } else if (this.status == VehicleStatus.PICKUP || this.status == VehicleStatus.SERVICE) {
+            result += (this.status == VehicleStatus.PICKUP)
+                ? " to pickup users "
+                : " in service with users ";
+
+            StringBuilder usersStr = new StringBuilder();
+
+            boolean first = true;
+            for (IUser user : this.service.getUsers()) {
+                if (!first) {
+                    usersStr.append(", ");
+                }
+                usersStr.append(user);
+                first = false;
+            }
+
+            result += usersStr.toString();
+        }
+        return result;
+    }
 }
 
