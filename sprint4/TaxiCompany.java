@@ -123,10 +123,16 @@ public class TaxiCompany implements ITaxiCompany, ISubject {
         // notify the observer a vehicle arrived at the pickup location
         IService service = vehicle.getService();
         int user = service.getUser().getId();
-        int userIndex = findUserIndex(user);
         this.totalServices++; // Increment total services when a pickup occurs
 
-        notifyObserver(String.format("%-8s",vehicle.getClass().getSimpleName()) + vehicle.getId() + " picks up user " + user);
+        // create string to notify observer
+        String note = String.format("%-8s",vehicle.getClass().getSimpleName()) + vehicle.getId() + " picks up user(s) ";
+        for(IUser user : service.getUsers()) {
+            note += user + ", "
+        }
+
+        note = note.substring(0, note.length() - 2);
+        notifyObserver(note);
         vehicle.startService();
     }
 
@@ -134,23 +140,28 @@ public class TaxiCompany implements ITaxiCompany, ISubject {
     public void arrivedAtDropoffLocation(IVehicle vehicle) {
         // a vehicle arrives at the drop-off location
 
-        IService service = vehicle.getService();       
-        int user = service.getUser().getId();
-        int userIndex = findUserIndex(user);
+        IService service = vehicle.getService(); 
+        String note = String.format("%-8s", vehicle.getClass().getSimpleName()) +
+            vehicle.getId() + " drops off user ";
 
-        // the taxi company requests the user to rate the service, and updates its status
-        this.users.get(userIndex).rateService(service);
-        this.users.get(userIndex).setService(false);
+        for(IUser u : service.getUsers()) {
+            int user = u.getId();
+            int userIndex = findUserIndex(user);
+
+            // the taxi company requests the user to rate the service, and updates its status
+            this.users.get(userIndex).rateService(service);
+            this.users.get(userIndex).setService(false);
+
+            note += user + ", ";
+        }      
 
         // update the counter of services
         this.totalServices--;    
 
-        notifyObserver(
-            String.format("%-8s", vehicle.getClass().getSimpleName()) +
-            vehicle.getId() + " drops off user " + user
-        );
+        note = note.substring(0, note.length() - 2);
+        notifyObserver(note);
 
-        vehicle.endService();
+        vehicle.endService(service.getUsers().size());
     }
 
     @Override

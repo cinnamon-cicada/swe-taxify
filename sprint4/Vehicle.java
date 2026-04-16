@@ -100,10 +100,15 @@ public abstract class Vehicle implements IVehicle {
     }
 
     @Override
-    public void endService() {
+    public void endService(int riders) {
         // update vehicle statistics
+        double discountPrice = 0.6;
+        if(riders == 1) {
+            this.statistics.updateBilling(this.calculateCost());
+        } else {
+            this.statistics.updateBilling(this.calculateCost() * discountPrice * riders);
+        }
         
-        this.statistics.updateBilling(this.calculateCost());
         this.statistics.updateDistance(this.service.calculateDistance());
         this.statistics.updateServices();
         
