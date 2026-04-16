@@ -34,7 +34,7 @@ public interface IVehicle extends IMovable {
 
     public IDriver setDriver(IDriver driver);
 
-    public IDriver getDriver();s
+    public IDriver getDriver();
 
     /**
      * Sets the taxi company this vehicle belongs to.

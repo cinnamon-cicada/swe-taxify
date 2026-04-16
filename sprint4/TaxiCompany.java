@@ -1,6 +1,7 @@
 package sprint3;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * TaxiCompany represents the core service provider in the simulation.
@@ -47,13 +48,27 @@ public class TaxiCompany implements ITaxiCompany, ISubject {
 
     @Override
     public boolean provideService(int user, boolean pinkRide, String rideMode) {
-        int userIndex = findUserIndex(user);        
-        int vehicleIndex = findFreeVehicle();
+        int userIndex = findUserIndex(user);
+        Object[] vehicleData = findFreeVehicle(pinkRide);
+        int vehicleIndex = vehicleData[0];
+
+        // implement shared rides, with random acceptance by users
+        boolean sharedRide = vehicleData[1];
+        boolean accept = false;
+
+        if (sharedRide) {
+            while(!accept && sharedRide) {
+                Object[] tempVehicle = findFreeVehicle(pinkRide);
+                vehicleIndex = tempVehicle[0];
+                sharedRide = tempVehicle[1];
+                
+            }
+        }
 
         // if there is a free vehicle, assign a random pickup and drop-off location to the new service
         // the distance between the pickup and the drop-off location should be at least 3 blocks
+        if (vehicleIndex >= 0) {
 
-        if (vehicleIndex != -1) {
             ILocation origin, destination;
 
             // Generate valid pickup and drop-off locations
@@ -147,16 +162,16 @@ public class TaxiCompany implements ITaxiCompany, ISubject {
      * Finds the first available (free) vehicle.
      * @return index of the free vehicle, or -1 if none are available.
      */
-    private int findFreeVehicle(boolean pinkRide) {
+    private Object[] findFreeVehicle(boolean pinkRide) {
         for (int i = 0; i < this.vehicles.size(); i++) {
-            if (this.vehicles.get(i).isFree() && (
-                !pinkRide ||
-                pinkRide && this.vehicles.get(i).getDriver().getGender() == "F")
-                ) {
-                return i;
+            if (this.vehicles.get(i).isFree()) {
+                if (!pinkRide || pinkRide && this.vehicles.get(i).getDriver().getGender() == "F") {
+                    return {i, false};
+                }
+            } else {
+                return {i, true}
             }
         }
-        return -1;
     }
 
     /**

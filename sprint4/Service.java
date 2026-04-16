@@ -38,11 +38,11 @@ public class Service implements IService {
     }
     
     /**
-     * Gets the user associated with this service.
-     * @return the IUser who requested the service
+     * Gets the users associated with this service.
+     * @return the IUsers who are included in the service
      */
     @Override
-    public IUser getUser() {
+    public IUser getUsers() {
         return this.user;
     }
     

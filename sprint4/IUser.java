@@ -73,4 +73,10 @@ public interface IUser {
      */
     public String toString();
 
+    /**
+     * Randomly returns acceptance of a shared ride offer
+     * @return True/accept, or false/reject
+     */
+    public boolean acceptSharedRide();
+
 }

@@ -1,6 +1,7 @@
 package sprint3;
 
 import java.time.LocalDate;
+import java.util.Random;
 
 /**
  * Represents a user in the taxi system with personal information and service management capabilities.
@@ -150,4 +151,15 @@ public class User implements IUser {
     public String toString() {
         return this.getId() + " " + String.format("%-20s",this.getFirstName() + " " + this.getLastName());
     }
+
+    /**
+     * Randomly returns acceptance of a shared ride offer
+     * @return True/accept, or false/reject
+     */
+    @Override
+    public boolean acceptSharedRide() {
+        Random rand = new Random();
+        float value = rand.nextFloat();
+        return value > 0.5;
+    };
 }
