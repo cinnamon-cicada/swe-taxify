@@ -1,9 +1,9 @@
-package sprint1;
+package sprint3;
 
 import java.time.LocalDate;
 
 /**
- * Interface representing a user in the taxi system.
+ * Interface representing a user.
  * Provides methods to access and modify user information, manage services, and interact with the taxi company.
  */
 public interface IUser {
@@ -55,18 +55,11 @@ public interface IUser {
      * @param company the ITaxiCompany to associate with the user
      */
     public void setCompany(ITaxiCompany company);
-
+    
     /**
      * Requests a service from the associated taxi company.
      */
     public void requestService();
-    
-    /**
-     * Requests a service from the associated taxi company.
-     * @param pinkRide requests a ride by, and for, women
-     * @param rideMode "Silent" or "Standard" noise levels for the ride
-     */
-    public void requestService(boolean pinkRide, String rideMode);
     
     /**
      * Rates a completed service.
