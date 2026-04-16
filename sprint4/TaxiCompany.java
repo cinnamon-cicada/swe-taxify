@@ -61,11 +61,10 @@ public class TaxiCompany implements ITaxiCompany, ISubject {
                 int[] tempVehicle = findFreeVehicle(pinkRide);
                 vehicleIndex = tempVehicle[0];
                 sharedRide = tempVehicle[1] == 1;
-                otherUsers = this.vehicles.get(vehicleIndex).getService().getUsers();
                 accept = this.users.get(userIndex).acceptSharedRide();
 
                 // obtain consent of other passenger(s)
-                for(IUser u : otherUsers) {
+                for(IUser u : this.vehicles.get(vehicleIndex).getService().getUsers()) {
                     accept = accept && u.acceptSharedRide();
                 }
             }
@@ -160,7 +159,7 @@ public class TaxiCompany implements ITaxiCompany, ISubject {
         note = note.substring(0, note.length() - 2);
         notifyObserver(note);
 
-        vehicle.endService(service.getUsers().length);
+        vehicle.endService(service.getUsers().size());
     }
 
     @Override
@@ -193,6 +192,7 @@ public class TaxiCompany implements ITaxiCompany, ISubject {
                 return new int[]{i, 1};
             }
         }
+        return new int[]{-1, -1};
     }
 
     /**
