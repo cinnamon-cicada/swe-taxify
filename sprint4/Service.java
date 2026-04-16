@@ -5,8 +5,8 @@ package sprint3;
  * Implements the IService interface to provide service management functionality.
  */
 public class Service implements IService {
-    /** The user associated with this service */
-    private IUser user;
+    /** The users associated with this service */
+    private ArrayList<IUser> users;
     /** The pickup location for this service */
     private ILocation pickup;
     /** The dropoff location for this service */
@@ -29,7 +29,8 @@ public class Service implements IService {
      * @param dropoff the dropoff location
      */
     public Service(IUser user, ILocation pickup, ILocation dropoff, boolean pinkRide, String rideMode) {
-        this.user = user;
+        this.users = new ArrayList<>();
+        this.users.add(user);
         this.pickup = pickup;
         this.dropoff = dropoff; 
         this.stars = 0;
@@ -42,8 +43,8 @@ public class Service implements IService {
      * @return the IUsers who are included in the service
      */
     @Override
-    public IUser getUsers() {
-        return this.user;
+    public IUser[] getUsers() {
+        return this.users[];
     }
     
     /**
@@ -98,5 +99,13 @@ public class Service implements IService {
     @Override
     public String toString() {
         return this.getPickupLocation().toString() + " to " + this.getDropoffLocation().toString();
+    }
+
+    /**
+     * Add a user to the current service.
+     */
+    @Override
+    public void addUser(IUser user) {
+        this.users.add(user);
     }
 }

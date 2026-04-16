@@ -47,5 +47,10 @@ public interface IService {
      * @return a string describing the service details
      */
     public String toString();
+
+    /**
+     * Add a user to the current service.
+     */
+    public void addUser();
     
 }
