@@ -200,30 +200,17 @@ public abstract class Vehicle implements IVehicle {
 
     @Override
     public String toString() {
-        String result = this.id + " at " + this.location + " driving to " + this.destination;
-
-        if (this.status == VehicleStatus.FREE) {
-            result += " is free with path " + this.route.toString();
-
-        } else if (this.status == VehicleStatus.PICKUP || this.status == VehicleStatus.SERVICE) {
-            result += (this.status == VehicleStatus.PICKUP)
-                ? " to pickup users "
-                : " in service with users ";
-
-            StringBuilder usersStr = new StringBuilder();
-
-            boolean first = true;
-            for (IUser user : this.service.getUsers()) {
-                if (!first) {
-                    usersStr.append(", ");
-                }
-                usersStr.append(user);
-                first = false;
-            }
-
-            result += usersStr.toString();
+        String users = ""
+        for(IUser user : this.service.getUsers()) {
+            users += user + ", ";
         }
+        users = users.substring(0, users.length() - 2);
+
+        String result = this.id + " at " + this.location + " driving to " + this.destination +
+                ((this.status == VehicleStatus.FREE) ? " is free with path " + this.route.toString(): ((this.status == VehicleStatus.PICKUP) ?
+                " to pickup user(s) " + users : " in service "));
+        }
+
         return result;
-    }
 }
 
