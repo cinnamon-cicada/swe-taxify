@@ -200,7 +200,7 @@ public abstract class Vehicle implements IVehicle {
 
     @Override
     public String toString() {
-        String users = ""
+        String users = "";
         for(IUser user : this.service.getUsers()) {
             users += user + ", ";
         }
@@ -209,8 +209,9 @@ public abstract class Vehicle implements IVehicle {
         String result = this.id + " at " + this.location + " driving to " + this.destination +
                 ((this.status == VehicleStatus.FREE) ? " is free with path " + this.route.toString(): ((this.status == VehicleStatus.PICKUP) ?
                 " to pickup user(s) " + users : " in service "));
-        }
+        
 
         return result;
+    }
 }
 
