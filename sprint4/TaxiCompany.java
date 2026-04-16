@@ -61,11 +61,17 @@ public class TaxiCompany implements ITaxiCompany, ISubject {
                 Object[] tempVehicle = findFreeVehicle(pinkRide);
                 vehicleIndex = tempVehicle[0];
                 sharedRide = tempVehicle[1];
-                
+                otherUsers = this.vehicles.get(vehicleIndex).getService().getUsers();
+                accept = this.users.get(userIndex).acceptSharedRide();
+
+                // obtain consent of other passenger(s)
+                for(IUser u : otherUsers) {
+                    accept = accept && u.acceptSharedRide();
+                }
             }
         }
 
-        // if there is a free vehicle, assign a random pickup and drop-off location to the new service
+        // if there is an available vehicle, assign a random pickup and drop-off location to the new service
         // the distance between the pickup and the drop-off location should be at least 3 blocks
         if (vehicleIndex >= 0) {
 
@@ -83,10 +89,15 @@ public class TaxiCompany implements ITaxiCompany, ISubject {
             this.users.get(userIndex).setService(true);
 
             // create a service with the user, the pickup and the drop-off location
-            IService service = new Service(this.users.get(userIndex), origin, destination, pinkRide, rideMode);
-
-            // assign the new service to the vehicle
-            this.vehicles.get(vehicleIndex).pickService(service);
+            // fetch existing if joining an existing ride
+            IService service;
+            if(sharedRide) {
+                service = this.vehicles.get(vehicleIndex).getService();
+                service.addUser(this.users.get(userIndex));
+            } else {
+                service = new Service(this.users.get(userIndex), origin, destination, pinkRide, rideMode);
+                this.vehicles.get(vehicleIndex).pickService(service);
+            }
 
             // Notify observer about the new service assignment
             notifyObserver(
