@@ -133,7 +133,7 @@ public class MicroVehicle implements IVehicle {
         // and status to "service"
         this.destination = this.service.getDropoffLocation();
         this.route = new Route(this.location, this.destination);
-        this.status = VehicleStatus.SERVICE;
+        this.status = VehicleStatus.SERVICE; //TODO: !!!!!!
     }
 
     /**
