@@ -36,7 +36,7 @@ public interface IVehicle extends IMovable {
      * Assigns a driver.
      *
      * @param driver the driver to set
-     * @return the driver that was assigned
+     * @return the driver that was assigned 
      */
     public void setDriver(IDriver driver);
 
