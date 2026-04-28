@@ -33,30 +33,12 @@ public class Scooter extends Vehicle {
     }
 
     /**
-     * Starts the service and sets destination to the drop-off location.
-     */
-    @Override
-    public void startService() {
-        if (this.battery <= 25) {
-            // Automatically recharge if battery is low before starting service
-            rechargeBattery();
-        }
-        // set destination to the service drop-off location, 
-        // and status to "service"
-        this.destination = this.service.getDropoffLocation();
-        this.route = new Route(this.location, this.destination);
-        this.status = MicroVehicleStatus.RIDING;
-    } 
-
-    /**
      * Ends the current service and updates vehicle statistics.
      * @param riders the number of riders
      */
     @Override
     public void endService(int riders) {
-        // call parent method
         super.endService(riders);
-        // decrease battery level after a service
         this.battery -= 25;
     }
 

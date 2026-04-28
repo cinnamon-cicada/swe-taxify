@@ -60,6 +60,11 @@ public interface IUser {
      * Requests a service from the associated taxi company.
      */
     public void requestService(boolean pinkRide, String rideMode);
+
+    /**
+     * Requests a rental service from the associated taxi company.
+     */    
+    public void requestRentalService();
     
     /**
      * Rates a completed service.

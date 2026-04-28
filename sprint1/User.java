@@ -118,7 +118,7 @@ public class User implements IUser {
     public void requestService() {
         this.company.provideService(this.id);
     }
-    
+
     /**
      * Rates a completed service.
      * @param service the IService to rate

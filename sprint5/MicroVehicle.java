@@ -133,7 +133,7 @@ public class MicroVehicle implements IVehicle {
         // and status to "service"
         this.destination = this.service.getDropoffLocation();
         this.route = new Route(this.location, this.destination);
-        this.status = VehicleStatus.SERVICE; //TODO: !!!!!!
+        this.status = MicroVehicleStatus.RIDING;
     }
 
     /**
@@ -165,7 +165,7 @@ public class MicroVehicle implements IVehicle {
         this.service = null;
         this.destination = ApplicationLibrary.randomLocation(this.location);
         this.route = new Route(this.location, this.destination);
-        this.status = VehicleStatus.FREE;
+        this.status = MicroVehicleStatus.FREE;
     }
 
     /**
@@ -198,7 +198,7 @@ public class MicroVehicle implements IVehicle {
      */
     @Override
     public boolean isFree() {
-        if(this.status == VehicleStatus.FREE) {
+        if(this.status == MicroVehicleStatus.FREE) {
             return true;
         }
         return false;

@@ -59,15 +59,18 @@ public class TaxiCompany implements ITaxiCompany, ISubject {
         int vehicleIndex = vehicleData[0];
 
         boolean sharedRide = vehicleData[1] == 1;
+        boolean noVehicle = vehicleData[1] == -1;
         boolean accept = false;
 
-        if (sharedRide) {
-            while(!accept && sharedRide) {
+        if (sharedRide || noVehicle) {
+            while(!accept && sharedRide || noVehicle) {
                 int[] tempVehicle = findFreeVehicle(pinkRide);
                 vehicleIndex = tempVehicle[0];
                 sharedRide = tempVehicle[1] == 1;
+                noVehicle = tempVehicle[1] == -1;
                 accept = this.users.get(userIndex).acceptSharedRide();
 
+                // obtain consent of other passenger(s)
                 for(IUser u : this.vehicles.get(vehicleIndex).getService().getUsers()) {
                     accept = accept && u.acceptSharedRide();
                 }
@@ -124,7 +127,7 @@ public class TaxiCompany implements ITaxiCompany, ISubject {
 
         String note = String.format("%-8s",vehicle.getClass().getSimpleName()) + vehicle.getId() + " picks up user(s) ";
         for(IUser u : service.getUsers()) {
-            note += u + ", ";
+            note += u.getId() + ", ";
         }
 
         note = note.substring(0, note.length() - 2);
@@ -141,7 +144,7 @@ public class TaxiCompany implements ITaxiCompany, ISubject {
 
         IService service = vehicle.getService(); 
         String note = String.format("%-8s", vehicle.getClass().getSimpleName()) +
-            vehicle.getId() + " drops off user ";
+            vehicle.getId() + " drops off user(s) ";
 
         for(IUser u : service.getUsers()) {
             int user = u.getId();
@@ -193,7 +196,7 @@ public class TaxiCompany implements ITaxiCompany, ISubject {
                 if (!pinkRide || pinkRide && this.vehicles.get(i).getDriver().getGender() == 'F') {
                     return new int[]{i, 0};
                 }
-            } else {
+            } else if (this.vehicles.get(i).getService().getUsers().size() < 2) {
                 return new int[]{i, 1};
             }
         }

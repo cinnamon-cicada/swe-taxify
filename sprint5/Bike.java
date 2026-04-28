@@ -21,4 +21,11 @@ public class Bike extends MicroVehicle {
     public double calculateCost() {
         return (super.calculateCost() - 1) * .25 + 1; // Bikes have a base cost of 1, and then charge 25% of the distance cost above that   
     }
+
+    /**
+    * Charges the scooter's battery to full (100%).
+    */
+    public void chargeBattery() {
+        this.battery = 100;
+    }
 }

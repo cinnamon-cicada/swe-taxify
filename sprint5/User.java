@@ -130,6 +130,14 @@ public class User implements IUser {
 
         this.company.provideService(this.id, pinkRide, rideMode);
     }
+
+    /**
+     * Requests a rental service from the associated taxi company.
+     */
+    @Override
+    public void requestRentalService() {
+        this.company.provideRentalService(this.id);
+    }
     
     /**
      * Rates a completed service.
