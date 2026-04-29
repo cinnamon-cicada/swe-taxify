@@ -117,6 +117,57 @@ public class TaxiCompany implements ITaxiCompany, ISubject {
     }
 
     /**
+     * Assigns a service to a user if possible.
+     * @param user user ID
+     * @param vehicleType type of rental: Scooter, Bike
+     * @return true if assigned
+     */
+    @Override
+    public boolean provideRentalService(int user, String vehicleType) {
+        int userIndex = findUserIndex(user);
+        MicroVehicle rental = findNearestRental(vehicleType);
+        int vehicleIndex = vehicleData[0];
+
+        if (rental != null) {
+
+            ILocation origin, destination;
+
+            do {
+                origin = ApplicationLibrary.randomLocation();
+                destination = ApplicationLibrary.randomLocation(origin);
+
+            } while (ApplicationLibrary.distance(origin, this.vehicles.get(vehicleIndex).getLocation()) 
+                     < ApplicationLibrary.MINIMUM_DISTANCE);
+
+            this.users.get(userIndex).setService(true);
+
+            IService service;
+            if(sharedRide) {
+                service = this.vehicles.get(vehicleIndex).getService();
+                service.addUser(this.users.get(userIndex));
+            } else {
+                service = new Service(this.users.get(userIndex), origin, destination, pinkRide, rideMode);
+                this.vehicles.get(vehicleIndex).pickService(service);
+            }
+
+            notifyObserver(
+                "User " + this.users.get(userIndex).getId() +
+                " requests a Rental " + vehicleType + " service from " + service.toString() +
+                ", the ride is assigned to " +
+                this.vehicles.get(vehicleIndex).getClass().getSimpleName() + " " +
+                this.vehicles.get(vehicleIndex).getId() + " at location " +
+                this.vehicles.get(vehicleIndex).getLocation().toString()
+            );
+
+            this.totalServices++;
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Called when vehicle reaches pickup.
      * @param vehicle vehicle
      */
