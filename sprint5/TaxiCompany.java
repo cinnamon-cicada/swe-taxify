@@ -231,6 +231,7 @@ public class TaxiCompany implements ITaxiCompany, ISubject {
      * @param vehicleType type of rental: SCOOTER or BIKE
      * @return the nearest available MicroVehicle of the specified type, or null if none are
      */
+    @Override
     private MicroVehicle findNearestRental(RentalVehicleType vehicleType) {
         MicroVehicle nearest = null;
         double minDistance = Double.MAX_VALUE;

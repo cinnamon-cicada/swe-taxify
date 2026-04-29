@@ -28,6 +28,23 @@ public interface ITaxiCompany {
     public boolean provideService(int user, boolean pinkRide, String rideMode);
 
     /**
+     * Assigns a service to a user if possible.
+     * @param user user ID
+     * @param vehicleType type of rental: SCOOTER or BIKE
+     * @return true if assigned
+     */
+    @Override
+    public boolean provideRentalService(int user, RentalVehicleType vehicleType);
+
+    /**
+     * Finds the nearest available rental vehicle of the specified type.
+     * @param vehicleType type of rental: SCOOTER or BIKE
+     * @return the nearest available MicroVehicle of the specified type, or null if none are
+     */
+    @Override
+    private MicroVehicle findNearestRental(RentalVehicleType vehicleType);
+
+    /**
      * Notifies the company that a vehicle has arrived at the pickup location.
      * @param vehicle the vehicle in question
      */

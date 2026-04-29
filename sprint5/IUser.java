@@ -6,7 +6,7 @@ import java.time.LocalDate;
  * Interface representing a user.
  * Provides methods to access and modify user information, manage services, and interact with the taxi company.
  */
-public interface IUser extends Person {
+public interface IUser {
 
     /**
      * Gets the unique identifier of the user.

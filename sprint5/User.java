@@ -8,7 +8,7 @@ import java.util.Random;
  * Represents a user in the taxi system with personal information and service management capabilities.
  * Implements the IUser interface to provide user-related functionality.
  */
-public class User implements IUser {
+public class User extends Person implements IUser {
     /** The unique identifier of the user */
     private int id;
     /** The taxi company associated with this user */
@@ -26,11 +26,9 @@ public class User implements IUser {
      */
     public User(int id, String firstName, String lastName, char gender, LocalDate birthDate) {
         this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.gender = gender;
-        this.birthDate = birthDate;
         this.service = false;
+
+        super(firstName, lastName, gender, birthDate);
     }
     
     /**

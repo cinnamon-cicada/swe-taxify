@@ -7,7 +7,7 @@ import java.time.LocalDate;
  * Represents a driver with profile details such as name, gender,
  * birth date, experience, and rating.
  */
-public class Driver implements IDriver {
+public class Driver extends Person implements IDriver {
 
     // driver’s profile
     private String name;
@@ -21,10 +21,9 @@ public class Driver implements IDriver {
      * Initializes a driver with default values.
      */
     public Driver() {
-        this.name = "";
-        this.gender = 'F';
         this.yearsOfExperience = 0;
         this.rating = 0.0;
+        super("", "", 'F', LocalDate.now());
     }
 
     /**

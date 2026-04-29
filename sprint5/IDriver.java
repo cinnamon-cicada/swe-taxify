@@ -6,7 +6,7 @@ import java.time.LocalDate;
  * Interface representing a Driver profile.
  * Provides method signatures for accessing and modifying driver attributes.
  */
-public interface IDriver extends Person {
+public interface IDriver {
     /**
      * Gets the driver's years of experience.
      * @return years of driving experience

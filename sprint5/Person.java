@@ -14,6 +14,21 @@ public class Person {
     private LocalDate birthDate;
 
     /**
+     * Constructor.
+     * Initializes a person with split name given.
+     * @param firstName the first name of the person
+     * @param lastName the last name of the person
+     * @param gender gender
+     * @param birthDate birth date
+     */
+    public Person(String firstName, String lastName, char gender, LocalDate birthDate) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.birthDate = birthDate;
+    }
+
+    /**
      * Gets the first name of the human.
      * @return the first name as a string
      */
