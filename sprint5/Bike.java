@@ -28,4 +28,12 @@ public class Bike extends MicroVehicle {
     public void chargeBattery() {
         this.battery = 100;
     }
+
+    /**
+     * Get vehicle type
+     */
+    @Override
+    public RentalVehicleType getVehicleType() {
+        return RentalVehicles.BIKE;
+    }
 }

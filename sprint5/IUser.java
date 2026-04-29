@@ -6,37 +6,13 @@ import java.time.LocalDate;
  * Interface representing a user.
  * Provides methods to access and modify user information, manage services, and interact with the taxi company.
  */
-public interface IUser {
+public interface IUser extends Person {
 
     /**
      * Gets the unique identifier of the user.
      * @return the user ID as an integer
      */
     public int getId();
-    
-    /**
-     * Gets the first name of the user.
-     * @return the first name as a string
-     */
-    public String getFirstName();
-    
-    /**
-     * Gets the last name of the user.
-     * @return the last name as a string
-     */
-    public String getLastName();
-    
-    /**
-     * Gets the gender of the user.
-     * @return the gender as a character ('M' or 'F')
-     */
-    public char getGender();
-    
-    /**
-     * Gets the birth date of the user.
-     * @return the birth date as a LocalDate
-     */
-    public LocalDate getBirthDate();
     
     /**
      * Checks if the user is currently in service.

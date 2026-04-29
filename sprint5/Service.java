@@ -16,7 +16,7 @@ public class Service implements IService {
     /** The star rating for this service */
     private int stars;
     /** The driver assigned to this service */
-    private IDriver driver;
+    private Person driver;
     /** Pink rides */
     private boolean isPink;
     /** Noise level: Silent or Standard */

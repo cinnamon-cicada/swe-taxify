@@ -48,4 +48,12 @@ public class Scooter extends Vehicle {
     public void chargeBattery() {
         this.battery = 100;
     }
+
+    /**
+     * Get vehicle type
+     */
+    @Override
+    public RentalVehicleType getVehicleType() {
+        return RentalVehicles.SCOOTER;
+    }
 }

@@ -9,7 +9,7 @@ public class MicroVehicle implements IVehicle {
     private ILocation destination;
     private IStatistics statistics;
     private IRoute route;
-    private IDriver driver;
+    private Person driver;
 
     /**
      * Constructs a MicroVehicle with the given ID, location, and driver.
@@ -17,25 +17,8 @@ public class MicroVehicle implements IVehicle {
      * @param location the initial location
      * @param driver the assigned driver
      */
-    public MicroVehicle(int id, ILocation location, IDriver driver) {
+    public MicroVehicle(int id, ILocation location, Person driver) {
         super(id, location, driver);
-    }
-
-    /**
-     * Initializes all private member variables for a vehicle.
-     * @param id the vehicle ID
-     * @param location the initial location
-     * @param driver the assigned driver
-     */
-    public Vehicle(int id, ILocation location, IDriver driver) {      //implementing all private membervariables   
-        this.id = id;
-        this.service = null;
-        this.status = VehicleStatus.FREE;
-        this.location = location;        
-        this.destination = ApplicationLibrary.randomLocation(this.location);
-        this.statistics = new Statistics();
-        this.route = new Route(this.location, this.destination);
-        this.driver = driver;
     }
 
     /**
@@ -43,7 +26,7 @@ public class MicroVehicle implements IVehicle {
      * @param driver the driver to assign
      */
     @Override
-    public void setDriver(IDriver driver) {
+    public void setDriver(Person driver) {
         this.driver = driver;
     };
 
@@ -52,7 +35,7 @@ public class MicroVehicle implements IVehicle {
      * @return the vehicle's driver
      */
     @Override
-    public IDriver getDriver() {
+    public Person getDriver() {
         return this.driver;
     };
 
@@ -265,4 +248,9 @@ public class MicroVehicle implements IVehicle {
 
         return result;
     }
+
+    /**
+     * Get vehicle type
+     */
+    public String getVehicleType();
 }

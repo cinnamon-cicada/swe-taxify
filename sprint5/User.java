@@ -11,14 +11,6 @@ import java.util.Random;
 public class User implements IUser {
     /** The unique identifier of the user */
     private int id;
-    /** The first name of the user */
-    private String firstName;
-    /** The last name of the user */
-    private String lastName;
-    /** The gender of the user */
-    private char gender;
-    /** The birth date of the user */
-    private LocalDate birthDate;
     /** The taxi company associated with this user */
     private ITaxiCompany company;
     /** Indicates if the user is currently in service */
@@ -48,42 +40,6 @@ public class User implements IUser {
     @Override
     public int getId() {
         return this.id;
-    }
-
-    /**
-     * Gets the first name of the user.
-     * @return the first name as a string
-     */
-    @Override
-    public String getFirstName() {
-        return this.firstName;
-    }
-    
-    /**
-     * Gets the last name of the user.
-     * @return the last name as a string
-     */
-    @Override
-    public String getLastName() {
-        return this.lastName;
-    }
-    
-    /**
-     * Gets the gender of the user.
-     * @return the gender as a character ('M' or 'F')
-     */
-    @Override
-    public char getGender() {
-       return this.gender;
-    }
-
-    /**
-     * Gets the birth date of the user.
-     * @return the birth date as a LocalDate
-     */
-    @Override
-    public LocalDate getBirthDate() {
-        return this.birthDate;
     }
 
     /**

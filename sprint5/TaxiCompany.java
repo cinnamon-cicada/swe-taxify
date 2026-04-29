@@ -119,11 +119,11 @@ public class TaxiCompany implements ITaxiCompany, ISubject {
     /**
      * Assigns a service to a user if possible.
      * @param user user ID
-     * @param vehicleType type of rental: Scooter, Bike
+     * @param vehicleType type of rental: SCOOTER or BIKE
      * @return true if assigned
      */
     @Override
-    public boolean provideRentalService(int user, String vehicleType) {
+    public boolean provideRentalService(int user, RentalVehicleType vehicleType) {
         int userIndex = findUserIndex(user);
         MicroVehicle rental = findNearestRental(vehicleType);
         int vehicleIndex = vehicleData[0];
@@ -131,24 +131,14 @@ public class TaxiCompany implements ITaxiCompany, ISubject {
         if (rental != null) {
 
             ILocation origin, destination;
-
-            do {
-                origin = ApplicationLibrary.randomLocation();
-                destination = ApplicationLibrary.randomLocation(origin);
-
-            } while (ApplicationLibrary.distance(origin, this.vehicles.get(vehicleIndex).getLocation()) 
-                     < ApplicationLibrary.MINIMUM_DISTANCE);
+            origin = rental.getLocation();
+            destination = ApplicationLibrary.randomLocation(origin);
 
             this.users.get(userIndex).setService(true);
 
             IService service;
-            if(sharedRide) {
-                service = this.vehicles.get(vehicleIndex).getService();
-                service.addUser(this.users.get(userIndex));
-            } else {
-                service = new Service(this.users.get(userIndex), origin, destination, pinkRide, rideMode);
-                this.vehicles.get(vehicleIndex).pickService(service);
-            }
+            service = new Service(this.users.get(userIndex), origin, destination, false, "Rental");
+            this.vehicles.get(vehicleIndex).pickService(service);
 
             notifyObserver(
                 "User " + this.users.get(userIndex).getId() +
@@ -234,6 +224,30 @@ public class TaxiCompany implements ITaxiCompany, ISubject {
             this.observer = observer;
         }
         observer.updateObserver(message);
+    }
+
+    /**
+     * Finds the nearest available rental vehicle of the specified type.
+     * @param vehicleType type of rental: SCOOTER or BIKE
+     * @return the nearest available MicroVehicle of the specified type, or null if none are
+     */
+    private MicroVehicle findNearestRental(RentalVehicleType vehicleType) {
+        MicroVehicle nearest = null;
+        double minDistance = Double.MAX_VALUE;
+
+        for (IVehicle vehicle : this.vehicles) {
+            if (vehicle instanceof MicroVehicle) {
+                MicroVehicle microVehicle = (MicroVehicle) vehicle;
+                if (microVehicle.getRentalType() == vehicleType && microVehicle.isFree()) {
+                    double distance = ApplicationLibrary.distance(microVehicle.getLocation(), microVehicle.getLocation());
+                    if (distance < minDistance) {
+                        minDistance = distance;
+                        nearest = microVehicle;
+                    }
+                }
+            }
+        }
+        return nearest;
     }
 
     /**
