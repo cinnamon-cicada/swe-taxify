@@ -71,11 +71,11 @@ public class TestProgram {
         users.get(5).requestRentalService(RentalVehicleType.BIKE);
         users.get(6).requestRentalService(RentalVehicleType.BIKE);
 
-        // // Initial taxi requests
-        // for (int i = 0; i < 5; i++) {
-        //     int userId = ApplicationLibrary.rand(users.size());
-        //     users.get(userId).requestService(false, "Silent");
-        // }
+        // Initial taxi requests
+        for (int i = 0; i < 5; i++) {
+            int userId = ApplicationLibrary.rand(users.size());
+            users.get(userId).requestService(false, "Silent");
+        }
 
         // Simulation loop
         while (true) {
@@ -91,10 +91,10 @@ public class TestProgram {
             if (allVehiclesFree) break;
 
             // Randomly request services
-            // if (ApplicationLibrary.rand() % 2 == 0) {
-            //     int userId = ApplicationLibrary.rand(users.size());
-            //     users.get(userId).requestService(false, "Silent");
-            // }
+            if (ApplicationLibrary.rand() % 2 == 0) {
+                int userId = ApplicationLibrary.rand(users.size());
+                users.get(userId).requestService(false, "Silent");
+            }
 
             // Rent a scooter repeatedly to test battery depletion and charging
             users.get(0).requestRentalService(RentalVehicleType.SCOOTER);
