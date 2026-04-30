@@ -48,6 +48,11 @@ public interface IVehicle extends IMovable {
     public Person getDriver();
 
     /**
+     * Get company.
+     */
+    public ITaxiCompany getCompany();
+
+    /**
      * Sets the taxi company this vehicle belongs to.
      * @param company the taxi company
      */

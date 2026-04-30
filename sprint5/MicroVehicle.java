@@ -90,7 +90,15 @@ public class MicroVehicle implements IVehicle {
     public IStatistics getStatistics() {
         return this.statistics; 
     }
-    
+
+    /**
+     * Get company.
+     */
+    @Override
+    public ITaxiCompany getCompany() {
+        return this.company;
+    }
+
     /**
      * Sets the company that operates this vehicle.
      * @param company the taxi company
@@ -106,7 +114,7 @@ public class MicroVehicle implements IVehicle {
      */
     @Override
     public void pickService(IService service) {
-        // pick a service, set destination to the service pickup location, and status to "pickup"
+        // pick a service, set destination to the service pickup location, and status to "booked"
         
         this.service = service;
         this.destination = service.getPickupLocation();

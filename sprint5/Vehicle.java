@@ -90,6 +90,14 @@ public abstract class Vehicle implements IVehicle {
     public IStatistics getStatistics() {
         return this.statistics; 
     }
+
+    /**
+     * Get company.
+     */
+    @Override
+    public ITaxiCompany getCompany() {
+        return this.company;
+    }
     
     /**
      * Sets the company that operates this vehicle.

@@ -1,57 +1,65 @@
 package sprint5;
 
 /**
- * Interface representing a taxi company that manages services and provides basic operations.
- * Provides methods to get the company name, total services, and to provide services to users.
+ * Interface defining the core operations of a taxi company.
  */
 public interface ITaxiCompany {
 
     /**
-     * Gets the name of the taxi company.
-     * @return the company name as a string
+     * @return company name
      */
-    public String getName();    
-    
+    String getName();
+
     /**
-     * Gets the total number of services provided by the company.
-     * @return the total number of services
+     * @return total services
      */
-    public int getTotalServices();
-    
-    /**
-     * Attempts to provide a service to the specified user.
-     * @param user the ID of the user requesting the service
-     * @param pinkRide if it's a ride offered by a woman driver to women/kids
-     * @param rideMode Silent or Standard offered
-     * @return true if the service was successfully provided, false otherwise
-     */
-    public boolean provideService(int user, boolean pinkRide, String rideMode);
+    int getTotalServices();
 
     /**
      * Assigns a service to a user if possible.
      * @param user user ID
+     * @param pinkRide require female driver
+     * @param rideMode ride type
+     * @return true if assigned
+     */
+    boolean provideService(int user, boolean pinkRide, String rideMode);
+
+    /**
+     * Assigns a rental service to a user if possible.
+     * @param user user ID
      * @param vehicleType type of rental: SCOOTER or BIKE
      * @return true if assigned
      */
-    public boolean provideRentalService(int user, RentalVehicleType vehicleType);
+    boolean provideRentalService(int user, RentalVehicleType vehicleType);
+
+    /**
+     * Called when vehicle reaches pickup.
+     * @param vehicle vehicle
+     */
+    void arrivedAtPickupLocation(IVehicle vehicle);
+
+    /**
+     * Called when vehicle reaches drop-off.
+     * @param vehicle vehicle
+     */
+    void arrivedAtDropoffLocation(IVehicle vehicle);
+
+    /**
+     * Adds an observer.
+     * @param observer observer
+     */
+    void addObserver(IObserver observer);
+
+    /**
+     * Notifies observer.
+     * @param message message
+     */
+    void notifyObserver(String message);
 
     /**
      * Finds the nearest available rental vehicle of the specified type.
      * @param vehicleType type of rental: SCOOTER or BIKE
-     * @return the nearest available MicroVehicle of the specified type, or null if none are
+     * @return the nearest available rental vehicle's index
      */
-    public int findNearestRental(RentalVehicleType vehicleType);
-
-    /**
-     * Notifies the company that a vehicle has arrived at the pickup location.
-     * @param vehicle the vehicle in question
-     */
-    public void arrivedAtPickupLocation(IVehicle vehicle);
-
-    /**
-     * Notifies the company that a vehicle has arrived at the dropoff location.
-     * @param vehicle the vehicle in question
-     */
-    public void arrivedAtDropoffLocation(IVehicle vehicle);
-    
+    int findNearestRental(RentalVehicleType vehicleType);
 }

@@ -34,19 +34,35 @@ public class Scooter extends MicroVehicle {
     }
 
     /**
+     * Start the service
+     */
+    @Override
+    public void startService() {
+        // set destination to the service drop-off location, 
+        // and status to "service"
+        if(this.battery <= 25) {
+            this.getCompany().notifyObserver("Scooter " + this.getId() + " has insufficient battery to start service. Current battery: " + this.battery + "%");
+            this.chargeBattery();
+        }
+        super.startService();
+    }
+
+    /**
      * Ends the current service and updates vehicle statistics.
      * @param riders the number of riders
      */
     @Override
     public void endService(int riders) {
-        super.endService(riders);
         this.battery -= 25;
+        this.getCompany().notifyObserver("Scooter " + this.getId() + " current battery: " + this.battery + "%");
+        super.endService(riders);
     }
 
     /**
     * Charges the scooter's battery to full (100%).
     */
     public void chargeBattery() {
+        this.getCompany().notifyObserver("Charging scooter " + this.getId() + " from " + this.battery + "% to 100%.");
         this.battery = 100;
     }
 

@@ -4,19 +4,14 @@ import java.util.List;
 import java.util.ArrayList;
 import java.time.LocalDate;
 
-// Declare a list of users. Instantiate at least 15 users.
-// Declare a list of vehicles. Instantiate at least 10 vehicles (Taxis and Shuttles) and locate them at random locations of the city map.
-// Instantiate the taxi company and the application simulator. Add the application simulator as an observer of the taxy company.
-// The simulation begins with at least 5 requests of service, and ends when all vehicles end their services. Show the status of the application each iteration and update its state. Simulate a request of a service randomly, to avoid requesting a service each iteration.
-// Finally, show the statistics.
-
 public class TestProgram {
     public static void main(String[] args) {
-        // Declare two drivers
-        IDriver driverA = new Driver("DriverA", 'F', LocalDate.of(1990, 7, 19), 5, 4.8);
-        IDriver driverB = new Driver("DriverB", 'M', LocalDate.of(1990, 7, 19), 5, 4.8);
 
-        // Declare a list of users and instantiate at least 15 users
+        // Declare drivers
+        IDriver driverA = new Driver("Driver A", 'F', LocalDate.of(1990, 7, 19), 5, 4.8);
+        IDriver driverB = new Driver("Driver B", 'M', LocalDate.of(1990, 7, 19), 5, 4.8);
+
+        // Create users
         List<IUser> users = new ArrayList<>();
         for (int i = 1; i <= 15; i++) {
             char gender = (i % 2 == 0) ? 'M' : 'F';
@@ -24,59 +19,90 @@ public class TestProgram {
             users.add(new User(i, "First" + i, "Last" + i, gender, birthDate));
         }
 
-        // Declare a list of vehicles
+        // Vehicle list
         List<IVehicle> vehicles = new ArrayList<>();
 
-        // Instantiate the taxi company (with empty vehicles list initially)
+        // Taxi company
         TaxiCompany company = new TaxiCompany("TaxiCo", users, vehicles);
 
-        // Instantiate at least 10 vehicles (Taxis and Shuttles) at random locations
+        // Assign company to users
+        for (IUser user : users) {
+            user.setCompany(company);
+        }
+
+        // Create taxis and shuttles
         for (int i = 0; i < 10; i++) {
             ILocation location = ApplicationLibrary.randomLocation();
             IVehicle vehicle;
+
             if (i < 5) {
                 vehicle = new Taxi(i, location, company, driverA);
             } else {
                 vehicle = new Shuttle(i, location, company, driverB);
             }
+
             vehicles.add(vehicle);
         }
 
-        // Instantiate the application simulator and add as observer
+        // --- ADD MICRO-VEHICLES ---
+        IVehicle scooter = new Scooter(100, ApplicationLibrary.randomLocation(), (Person) driverA, company);
+        vehicles.add(scooter);
+
+        IVehicle bike1 = new Bike(101, ApplicationLibrary.randomLocation(), (Person) driverB, company);
+        IVehicle bike2 = new Bike(102, ApplicationLibrary.randomLocation(), (Person) driverA, company);
+        IVehicle bike3 = new Bike(103, ApplicationLibrary.randomLocation(), (Person) driverB, company);
+
+        vehicles.add(bike1);
+        vehicles.add(bike2);
+        vehicles.add(bike3);
+
+        // Simulator
         IApplicationSimulator simulator = new ApplicationSimulator(company, users, vehicles);
         IObserver observer = (IObserver) simulator;
         company.addObserver(observer);
 
-        // Start simulation with at least 5 requests
-        for (int i = 0; i < 5; i++) {
-            int userId = ApplicationLibrary.rand(users.size());
-            users.get(userId).requestService(false, "Silent");
-        }
+        // --- FORCED RENTALS ---
+        users.get(0).requestRentalService(RentalVehicleType.SCOOTER);
+        users.get(1).requestRentalService(RentalVehicleType.SCOOTER);
+        users.get(2).requestRentalService(RentalVehicleType.SCOOTER);
+        users.get(3).requestRentalService(RentalVehicleType.SCOOTER);
 
-        // Show status each iteration
+        users.get(4).requestRentalService(RentalVehicleType.BIKE);
+        users.get(5).requestRentalService(RentalVehicleType.BIKE);
+        users.get(6).requestRentalService(RentalVehicleType.BIKE);
+
+        // // Initial taxi requests
+        // for (int i = 0; i < 5; i++) {
+        //     int userId = ApplicationLibrary.rand(users.size());
+        //     users.get(userId).requestService(false, "Silent");
+        // }
+
+        // Simulation loop
         while (true) {
             boolean allVehiclesFree = true;
+
             for (IVehicle vehicle : vehicles) {
                 if (!vehicle.isFree()) {
                     allVehiclesFree = false;
                     break;
                 }
             }
-            if (allVehiclesFree) {
-                break; // End simulation when all vehicles are free
-            }
 
-            // Randomly request a service
-            if (ApplicationLibrary.rand() % 2 == 0) {
-                int userId = ApplicationLibrary.rand(users.size());
-                users.get(userId).requestService(false, "Silent");
-            }
+            if (allVehiclesFree) break;
 
-            // Update and show status
+            // Randomly request services
+            // if (ApplicationLibrary.rand() % 2 == 0) {
+            //     int userId = ApplicationLibrary.rand(users.size());
+            //     users.get(userId).requestService(false, "Silent");
+            // }
+
+            // Rent a scooter repeatedly to test battery depletion and charging
+            users.get(0).requestRentalService(RentalVehicleType.SCOOTER);
+
             simulator.update();
         }
-
-        // Show statistics at the end
+        users.get(0).requestRentalService(RentalVehicleType.SCOOTER);
+        simulator.update();
         simulator.showStatistics();
     }
 }
