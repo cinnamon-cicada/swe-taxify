@@ -1,6 +1,8 @@
 package sprint5;
 
 public class Bike extends MicroVehicle {
+    private RentalVehicleType rentalType = RentalVehicleType.BIKE;
+
     /**
      * Constructs a Bike with the given ID, location, driver, and company.
      * @param id the vehicle ID
@@ -8,7 +10,7 @@ public class Bike extends MicroVehicle {
      * @param driver the assigned driver
      * @param company the taxi company this bike belongs to
      */
-    public Bike(int id, ILocation location, IDriver driver, ICompany company) {
+    public Bike(int id, ILocation location, Person driver, ITaxiCompany company) {
         super(id, location, driver);
         this.setCompany(company);
     }
@@ -23,17 +25,10 @@ public class Bike extends MicroVehicle {
     }
 
     /**
-    * Charges the scooter's battery to full (100%).
-    */
-    public void chargeBattery() {
-        this.battery = 100;
-    }
-
-    /**
      * Get vehicle type
      */
     @Override
-    public RentalVehicleType getVehicleType() {
-        return RentalVehicles.BIKE;
+    public RentalVehicleType getRentalType() {
+        return this.rentalType;
     }
 }

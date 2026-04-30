@@ -18,7 +18,14 @@ public class MicroVehicle implements IVehicle {
      * @param driver the assigned driver
      */
     public MicroVehicle(int id, ILocation location, Person driver) {
-        super(id, location, driver);
+        this.id = id;
+        this.service = null;
+        this.status = MicroVehicleStatus.FREE;
+        this.location = location;        
+        this.destination = ApplicationLibrary.randomLocation(this.location);
+        this.statistics = new Statistics();
+        this.route = new Route(this.location, this.destination);
+        this.driver = driver;
     }
 
     /**
@@ -104,7 +111,7 @@ public class MicroVehicle implements IVehicle {
         this.service = service;
         this.destination = service.getPickupLocation();
         this.route = new Route(this.location, this.destination);        
-        this.status = VehicleStatus.PICKUP;
+        this.status = MicroVehicleStatus.BOOKED;
     }
 
     /**
@@ -241,9 +248,9 @@ public class MicroVehicle implements IVehicle {
         }
         users = users.substring(0, users.length() - 2);
 
-        String result = this.id + " at " + this.location + " driving to " + this.destination +
-                ((this.status == VehicleStatus.FREE) ? " is free with path " + this.route.toString(): ((this.status == VehicleStatus.PICKUP) ?
-                " to pickup user(s) " + users : " in service "));
+        String result = this.id + " at " + this.location + " with destination: " + this.destination +
+                ((this.status == MicroVehicleStatus.FREE) ? " is free with path " + this.route.toString(): ((this.status == MicroVehicleStatus.BOOKED) ?
+                " is booked by " + users : " in service "));
         
 
         return result;
@@ -252,5 +259,7 @@ public class MicroVehicle implements IVehicle {
     /**
      * Get vehicle type
      */
-    public String getVehicleType();
+    public RentalVehicleType getRentalType() {
+        return null;
+    };
 }

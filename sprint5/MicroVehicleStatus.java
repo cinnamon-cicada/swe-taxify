@@ -1,6 +1,6 @@
 package sprint5;
 
-public enum VehicleStatus {
+public enum MicroVehicleStatus {
 
     FREE, BOOKED, RIDING
 

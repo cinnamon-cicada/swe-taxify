@@ -21,9 +21,9 @@ public class Driver extends Person implements IDriver {
      * Initializes a driver with default values.
      */
     public Driver() {
+        super("Miss", "Driver", 'F', LocalDate.now());
         this.yearsOfExperience = 0;
         this.rating = 0.0;
-        super("", "", 'F', LocalDate.now());
     }
 
     /**
@@ -38,59 +38,9 @@ public class Driver extends Person implements IDriver {
      */
     public Driver(String name, char gender, LocalDate birthDate,
                   int yearsOfExperience, double rating) {
-        this.name = name;
-        this.gender = gender;
-        this.birthDate = birthDate;
+        super(name.split(" ")[0], name.split(" ")[1], gender, birthDate);
         this.yearsOfExperience = yearsOfExperience;
         this.rating = rating;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public char getGender() {
-        return gender;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setGender(char gender) {
-        this.gender = gender;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
     }
 
     /**

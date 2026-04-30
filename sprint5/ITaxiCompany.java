@@ -33,7 +33,6 @@ public interface ITaxiCompany {
      * @param vehicleType type of rental: SCOOTER or BIKE
      * @return true if assigned
      */
-    @Override
     public boolean provideRentalService(int user, RentalVehicleType vehicleType);
 
     /**
@@ -41,8 +40,7 @@ public interface ITaxiCompany {
      * @param vehicleType type of rental: SCOOTER or BIKE
      * @return the nearest available MicroVehicle of the specified type, or null if none are
      */
-    @Override
-    private MicroVehicle findNearestRental(RentalVehicleType vehicleType);
+    public int findNearestRental(RentalVehicleType vehicleType);
 
     /**
      * Notifies the company that a vehicle has arrived at the pickup location.

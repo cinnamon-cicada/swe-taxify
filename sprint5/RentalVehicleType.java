@@ -1,6 +1,6 @@
 package sprint5;
 
-public enum RentalVehicles {
+public enum RentalVehicleType {
     SCOOTER,
     BIKE
 }

@@ -125,13 +125,12 @@ public class TaxiCompany implements ITaxiCompany, ISubject {
     @Override
     public boolean provideRentalService(int user, RentalVehicleType vehicleType) {
         int userIndex = findUserIndex(user);
-        MicroVehicle rental = findNearestRental(vehicleType);
-        int vehicleIndex = vehicleData[0];
+        int vehicleIndex = findNearestRental(vehicleType);
 
-        if (rental != null) {
+        if (vehicleIndex >= 0) {
 
             ILocation origin, destination;
-            origin = rental.getLocation();
+            origin = this.vehicles.get(vehicleIndex).getLocation();
             destination = ApplicationLibrary.randomLocation(origin);
 
             this.users.get(userIndex).setService(true);
@@ -229,26 +228,27 @@ public class TaxiCompany implements ITaxiCompany, ISubject {
     /**
      * Finds the nearest available rental vehicle of the specified type.
      * @param vehicleType type of rental: SCOOTER or BIKE
-     * @return the nearest available MicroVehicle of the specified type, or null if none are
+     * @return the nearest available rental vehicle's index
      */
     @Override
-    private MicroVehicle findNearestRental(RentalVehicleType vehicleType) {
-        MicroVehicle nearest = null;
+    public int findNearestRental(RentalVehicleType vehicleType) {
+        int nearestIndex = -1;
         double minDistance = Double.MAX_VALUE;
 
-        for (IVehicle vehicle : this.vehicles) {
+        for (int i = 0; i < this.vehicles.size(); i++) {
+            IVehicle vehicle = this.vehicles.get(i);
             if (vehicle instanceof MicroVehicle) {
                 MicroVehicle microVehicle = (MicroVehicle) vehicle;
                 if (microVehicle.getRentalType() == vehicleType && microVehicle.isFree()) {
                     double distance = ApplicationLibrary.distance(microVehicle.getLocation(), microVehicle.getLocation());
                     if (distance < minDistance) {
                         minDistance = distance;
-                        nearest = microVehicle;
+                        nearestIndex = i;
                     }
                 }
             }
         }
-        return nearest;
+        return nearestIndex;
     }
 
     /**

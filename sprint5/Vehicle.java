@@ -9,7 +9,7 @@ public abstract class Vehicle implements IVehicle {
     private ILocation destination;
     private IStatistics statistics;
     private IRoute route;
-    private IDriver driver;
+    private Person driver;
         
     /**
      * Initializes all private member variables for a vehicle driven by a professional driver.
@@ -17,24 +17,7 @@ public abstract class Vehicle implements IVehicle {
      * @param location the initial location
      * @param driver the assigned driver
      */
-    public Vehicle(int id, ILocation location, IDriver driver) {      //implementing all private membervariables   
-        this.id = id;
-        this.service = null;
-        this.status = VehicleStatus.FREE;
-        this.location = location;        
-        this.destination = ApplicationLibrary.randomLocation(this.location);
-        this.statistics = new Statistics();
-        this.route = new Route(this.location, this.destination);
-        this.driver = driver;
-    }
-
-    /**
-     * Initializes all private member variables for a vehicle driven by a user.
-     * @param id the vehicle ID
-     * @param location the initial location
-     * @param driver the assigned driver
-     */
-    public Vehicle(int id, ILocation location, IDriver driver) {      //implementing all private membervariables   
+    public Vehicle(int id, ILocation location, Person driver) {      //implementing all private membervariables   
         this.id = id;
         this.service = null;
         this.status = VehicleStatus.FREE;
@@ -50,7 +33,7 @@ public abstract class Vehicle implements IVehicle {
      * @param driver the driver to assign
      */
     @Override
-    public void setDriver(IDriver driver) {
+    public void setDriver(Person driver) {
         this.driver = driver;
     };
 
@@ -59,7 +42,7 @@ public abstract class Vehicle implements IVehicle {
      * @return the vehicle's driver
      */
     @Override
-    public IDriver getDriver() {
+    public Person getDriver() {
         return this.driver;
     };
 

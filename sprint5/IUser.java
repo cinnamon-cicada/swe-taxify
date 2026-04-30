@@ -40,7 +40,7 @@ public interface IUser {
     /**
      * Requests a rental service from the associated taxi company.
      */    
-    public void requestRentalService();
+    public void requestRentalService(RentalVehicleType vehicleType);
     
     /**
      * Rates a completed service.

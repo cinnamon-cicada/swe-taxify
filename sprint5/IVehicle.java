@@ -38,14 +38,14 @@ public interface IVehicle extends IMovable {
      * @param driver the driver to set
      * @return the driver that was assigned
      */
-    public void setDriver(IDriver driver);
+    public void setDriver(Person driver);
 
     /**
      * Retrieves the current driver.
      *
      * @return the current driver, or null if no driver is assigned
      */
-    public IDriver getDriver();
+    public Person getDriver();
 
     /**
      * Sets the taxi company this vehicle belongs to.

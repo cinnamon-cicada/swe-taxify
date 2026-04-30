@@ -25,10 +25,9 @@ public class User extends Person implements IUser {
      * @param birthDate the birth date
      */
     public User(int id, String firstName, String lastName, char gender, LocalDate birthDate) {
+        super(firstName, lastName, gender, birthDate);
         this.id = id;
         this.service = false;
-
-        super(firstName, lastName, gender, birthDate);
     }
     
     /**
@@ -87,10 +86,11 @@ public class User extends Person implements IUser {
 
     /**
      * Requests a rental service from the associated taxi company.
+     * @param vehicleType the type of rental vehicle requested
      */
     @Override
-    public void requestRentalService() {
-        this.company.provideRentalService(this.id);
+    public void requestRentalService(RentalVehicleType vehicleType) {
+        this.company.provideRentalService(this.id, vehicleType);
     }
     
     /**
