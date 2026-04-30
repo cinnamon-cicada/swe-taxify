@@ -1,19 +1,25 @@
-# SWE-Taxify (Sprint 4)
+# SWE-Taxify (Final)
 
-This folder contains the Sprint4 implementation of a simple taxi service simulation in Java.
+This folder contains the final implementation of a simple taxi service simulation in Java.
 
 ## Overview
 
-This sprint focuses on the implementation of the IDriver and Driver classes, aswell as the introduction of Pink Rides and RideTypes (Silent/Standered). Other classes are updated to accomadate these changes.
+This final sprint focuses on the finalization of the Taxify program. It adds new MicroVehicles which include Bike and Scooter options as well as revamping Drivers and Users to be subclasses of Person. Small changes were also made to TaxiCompany and User. This is the finalized project completed with a test program implemeted!
 
 ## Classes
 
 - `ApplicationLibrary`: Provides utility methods for generating random data and calculating distances.
 - `ApplicationSimulator`: Acts as the main orchestrator of the taxi company simulation.
+- `Bike`: Represents a bike which extends MicroVehicle.
 - `Driver`: Represents a driver with profile details such as name, gender, birth date, experience, and rating.
 - `Location`: Represents a location on a 10x10 grid with x and y coordinates.
+- `MicroVehicle`: Represents an implementation of IVehichle which is avaliable for rent and needs to be additionally purchased.
+- `MicroVehicleStatus`: Enum which specifies state of a MicroVehicle.
+- `Person`: Represents a user with an ID and name.
+- `RentalVehicleType`: Enum which specifies different MicroVehicle options.
 - `Route`: Represents a route between two locations, including distance calculation.
 - `Service`: Represents a service request with pickup and dropoff locations, user, and rating.
+- `Scooter`: Represents a scooter which extends MicroVehicle.
 - `Statistics`: Tracks various statistics such as number of services, total distance, total billing, and average rating.
 - `User`: Represents a user with an ID and name.
 - `Vehicle`: Base class for all vehicles, implementing the IVehicle interface.
@@ -36,5 +42,5 @@ This sprint focuses on the implementation of the IDriver and Driver classes, asw
 - `IVehicle`: Defines methods for vehicle objects, including movement, service management, and cost calculation.
 
 
-Suppose the CEO of the company decides to enter the market of micro-mobility services with electric scooters and bikes. Redesign the system to provide these services. Users can find the nearest vehicle to their location and make a reservation to ensure the vehicle will be available. Unlocking microvehicles costs 1.0 euro. The standard rate for scooters is 0.15 euros, and the rate for bikes is 0.25 euros. Scooters and bikes have three different statuses: free, booked, or in a ride. It is also important to note that in order to book a scooter, the battery must be fully charged. The battery consumption of one ride is 25%. Scooters must be recharged after 3 rides, when the battery is below or equal 25%.
+
 
